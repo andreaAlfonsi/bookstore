@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">I Tuoi Libri Preferiti</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let book of favorites">
+      <div class="card">
+        <!--<img class="card-img-top" [src]="book.imageUrl" alt="{{ book.title }}">-->
+        <div class="card-body">
+          <h5 class="card-title" [routerLink]="['/book', book.id]">{{ book.titolo }}</h5>
+          <p class="card-text">Autore: {{ book.autore }}</p>
+		  <p class="card-text">Pubblicato nel: {{ book.anno_pubblicazione }}</p>
+		  <p class="card-text">Costo: {{ book.prezzo | currency:'EUR' }}</p>
+          <a [routerLink]="['/book', book.id]" class="btn btn-primary">Vedi dettagli</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<div *ngIf="favorites.length === 0" class="text-center">
+    <p class="lead">Non hai ancora aggiunto libri ai preferiti.</p>
+  </div>
+</div>

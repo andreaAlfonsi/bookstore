@@ -1,0 +1,90 @@
+<div class="container my-4">
+  <h2 class="mb-3 text-center">Catalogo dei Libri</h2>
+  <div class="card p-3">
+    <h5>Filtri e Ordinamento</h5>
+	
+	<form (ngSubmit)="applyFilters()" class="row g-3 align-items-center">
+	  <div class="col-md-4">
+		  <label>
+			Autore:
+			<input type="text" class="form-control" [(ngModel)]="filterCriteria.autore" name="autore" placeholder="Cerca per autore">
+		  </label>
+	  </div>
+	  <div class="col-md-4">
+		  <label>
+			Anno di Pubblicazione:
+			<input type="text" class="form-control" [(ngModel)]="filterCriteria.anno_pubblicazione" name="anno_pubblicazione"  placeholder="Es. 2001">
+		  </label>
+	  </div>
+	  <div class="col-md-4">
+			<label>Ordina per: 
+				<select class="form-select" name="sortCriteria" [(ngModel)]="sortCriteria" (change)="applySort()">
+				  <option value="">Seleziona</option>
+				  <option value="titolo">Titolo</option>
+				  <option value="autore">Autore</option>
+				  <option value="anno_pubblicazione">Anno di Pubblicazione</option>
+				  <option value="prezzo">Prezzo</option>
+				</select>
+			</label>
+		</div>
+		<div class="col-12 d-flex justify-content">
+			<button class="btn btn-primary me-2" type="submit">Applica Filtri</button>
+			<button class="btn btn-secondary" (click)="resetFilters()">Resetta Filtri</button>
+		</div>
+	</form>
+  </div>
+<div>
+<div>
+
+</div>
+
+<!--<app-book-form
+  *ngIf="selectedBook" 
+  [book]="selectedBook" 
+  (formSubmit)="updateBook($event)">
+</app-book-form>
+-->
+<table class="table table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Titolo</th>
+        <th scope="col">Autore</th>
+        <th scope="col">Anno di Pubblicazione</th>
+        <th scope="col">Prezzo</th>
+        <th scope="col">Azione</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+	    <ng-container *ngIf="!editingBookId || editingBookId !== book.id; else editMode">
+			<td [routerLink]="['/book', book.id]">{{ book.titolo }}</td>
+			<td>{{ book.autore }}</td>
+			<td>{{ book.anno_pubblicazione }}</td>
+			<td>{{ book.prezzo | currency:'EUR' }}</td>
+			<td>
+			  <button class="btn btn-outline-secondary btn-sm me-2" [routerLink]="['/book', book.id]">Dettagli</button>
+			  <button class="btn btn-primary btn-sm me-2" *ngIf="(isAdmin$ | async)" (click)="onEdit(book)">Modifica</button>
+			  <button class="btn btn-danger btn-sm" *ngIf="(isAdmin$ | async)" (click)="deleteBook(book.id)">Elimina</button>       
+			</td>
+		</ng-container>
+		<ng-template #editMode>
+			<td><input [(ngModel)]="editedBook!.titolo" class="form-control" /></td>
+			<td><input [(ngModel)]="editedBook!.autore" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="editedBook!.anno_pubblicazione" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="editedBook!.prezzo" class="form-control" /></td>
+			<td *ngIf="(isAdmin$ | async)">
+			  <button class="btn btn-success btn-sm" (click)="onSave()">Salva</button>
+			  <button class="btn btn-secondary btn-sm" (click)="onCancel()">Annulla</button>
+			</td>
+      </ng-template>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="books.length === 0" class="text-center mt-4">
+    <p class="text-muted">Nessun libro trovato.</p>
+  </div>
+</div>
+
+<app-book-form 
+  (formSubmit)="addBook($event)">
+</app-book-form>

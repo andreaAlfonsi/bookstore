@@ -1,0 +1,42 @@
+<div class="container mt-5" *ngIf="book">
+  <!-- Sezione Dati del Libro -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title">{{ book.titolo }}</h3>
+	  <p class="text-muted">Autore: {{ book.autore }}</p>
+      <p class="text-muted">Anno: {{ book.anno_pubblicazione }}</p>
+      <p class="text-muted">Prezzo: {{ book.prezzo | currency:'EUR' }}</p>	  
+      <app-add-favorite *ngIf="(isLoggedIn$ | async)"></app-add-favorite>
+    </div>
+  </div>
+  <!-- informazioni per l'acquisto -->
+  <div class="card mb-4 shadow-sm" *ngIf="(isLoggedIn$ | async)">
+    <div class="card-header bg-info text-white">
+      <h5>Aggiungi al Carrello</h5>
+    </div>
+    <div class="card-body">
+      <div class="form-inline">
+        <label for="quantity" class="mr-3">Quantità:</label>
+        <input
+          type="number"
+          id="quantity"
+          class="form-control"
+          [(ngModel)]="quantity"
+          name="quantity"
+          min="1"
+          placeholder="1"
+          style="width: 80px;"
+        />
+        <button class="btn btn-success ml-3" (click)="addToCart()">
+          Aggiungi al Carrello
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Sezione Chat con Book Buddy -->
+  <app-book-buddy></app-book-buddy>
+  <!-- Sezione Recensioni -->
+  <app-review-list></app-review-list>
+  
+  <a class="btn btn-primary" routerLink="/">Torna alla Lista</a>
+</div>

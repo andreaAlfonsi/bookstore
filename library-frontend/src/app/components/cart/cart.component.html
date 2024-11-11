@@ -1,0 +1,49 @@
+<div class="container my-4" *ngIf="cart">
+  <h2 class="text-center mb-4">Il Tuo Carrello</h2>
+
+  <!-- Lista degli articoli nel carrello -->
+  <div *ngIf="cart.items.length > 0; else noItems">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Libro</th>
+            <th scope="col">Prezzo</th>
+            <th scope="col">Quantità</th>
+            <th scope="col">Azione</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart.items">
+            <td>{{ item.book }}</td>
+            <td>€{{ item.total_price | number:'1.2-2' }}</td>
+            <td>
+              {{ item.quantity }}
+            </td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="removeFromCart(item.book_id)">Rimuovi</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Totale Carrello -->
+    <div class="d-flex justify-content-end mt-3">
+      <h4>Totale: {{ total | number: '.2-2' | currency:'EUR' }}</h4>
+    </div>
+
+    <!-- Bottone Checkout -->
+    <div class="d-flex justify-content-center mt-3">
+      <button class="btn btn-success btn-lg" (click)="proceedToCheckout()">Procedi al Checkout</button>
+    </div>
+  </div>
+
+  <!-- Messaggio se il carrello è vuoto -->
+  <ng-template #noItems>
+    <div class="text-center">
+      <p class="text-muted">Il tuo carrello è vuoto.</p>
+      <button class="btn btn-primary" routerLink="/">Aggiungi Libri</button>
+    </div>
+  </ng-template>
+</div>

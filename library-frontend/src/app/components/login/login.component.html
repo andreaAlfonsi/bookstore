@@ -1,0 +1,19 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow-sm" style="max-width: 400px; width: 100%;">
+    <h3 class="text-center mb-4">Accedi</h3>
+	  <form (ngSubmit)="login()">
+		  <div class="mb-3">
+			<label for="username">Username:</label>
+			<input [(ngModel)]="credentials.username" name="username" class="form-control" required>
+		  </div>
+		  <div class="mb-3">
+			<label for="pwd">Password:</label>
+			<input [(ngModel)]="credentials.password" name="password" type="password" required class="form-control" id="pwd" required>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Accedi</button>
+		  <div class="text-center">
+			<small>Non hai un account? <a routerLink="/register">Registrati qui</a></small>
+		  </div>
+	</form>
+ </div>
+</div>

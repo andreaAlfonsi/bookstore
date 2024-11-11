@@ -1,0 +1,36 @@
+<div class="container mt-5" *ngIf="(isAdmin$ | async)">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h4>Aggiungi un Nuovo Libro</h4>
+    </div>
+    <div class="card-body">
+		<form name="newBookForm" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+		  <div class="form-group">
+		  <label>
+			Titolo:
+			<input formControlName="titolo" class="form-control" type="text" required>
+		  </label>
+		  </div>
+		  <div class="form-group">
+		  <label>
+			Autore:
+			<input formControlName="autore" class="form-control" type="text" required>
+		  </label>
+		  </div>
+		  <div class="form-group">
+		  <label>
+			Anno di Pubblicazione:
+			<input formControlName="anno_pubblicazione" class="form-control" type="string" required>
+		  </label>
+		  </div>
+		  <div class="form-group">
+		  <label>
+			Prezzo:
+			<input formControlName="prezzo" class="form-control" type="string" min="0" required>
+		  </label>
+		  </div>
+		  <button type="submit" class="btn btn-success mt-3" [disabled]="bookForm.invalid">Salva</button>
+		</form>
+	</div>
+  </div>
+</div>

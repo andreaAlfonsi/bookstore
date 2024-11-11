@@ -1,0 +1,6 @@
+<button *ngIf="isFavorite" (click)="removeFromFavorites()" class="btn btn-danger">
+        Rimuovi dai preferiti
+</button>
+<button *ngIf="!isFavorite" (click)="addToFavorites()" class="btn btn-primary">
+        Aggiungi ai preferiti
+</button>

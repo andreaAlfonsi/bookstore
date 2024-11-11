@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!--<a class="navbar-brand" href="#">BookStore</a>-->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav mr-auto mb-2 mb-lg-0" >
+      <li class="nav-item">
+        <a class="nav-link" routerLink="">Home</a>
+      </li>
+      <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
+        <a class="nav-link" routerLink="/login">Accedi</a>
+      </li>
+      <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
+        <a class="nav-link" routerLink="/register">Registrati</a>
+      </li>
+	  <li class="nav-item" *ngIf="isLoggedIn$ | async">
+        <a class="nav-link" routerLink="/favorites">Preferiti</a>
+      </li>
+	  <li class="nav-item" *ngIf="isLoggedIn$ | async">
+        <a class="nav-link" routerLink="/cart">Carrello</a>
+      </li>
+	  <li class="nav-item" *ngIf="isLoggedIn$ | async">
+        <a role="button" class="nav-link" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

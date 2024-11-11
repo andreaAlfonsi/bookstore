@@ -1,0 +1,24 @@
+<!-- Lista delle recensioni -->
+ <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-secondary text-white">
+      <h5>Recensioni</h5>
+    </div>
+    <div class="card-body" *ngIf="reviews.length > 0">
+		<div *ngFor="let review of reviews" class="border-bottom pb-2 mb-2">
+		  <strong>Username: {{ review.username }}</strong>
+		  <p>Rating: {{ review.rating }}/5</p>
+		  <p>Commento: {{ review.comment }}</p>
+		  <small>Scritto nel: {{ review.created_at | date }}</small>
+		</div>
+		<app-add-review *ngIf="(isLoggedIn$ | async)"></app-add-review>
+	</div>
+	<div class="card-body" *ngIf="reviews.length < 1">
+		<div class="border-bottom pulb-2 mulb-2">
+			<p>Questo libro non ha ancora recensioni.</p>
+			<app-add-review *ngIf="(isLoggedIn$ | async)"></app-add-review>
+		</div>
+    </div>
+</div>
+
+	  
+	  

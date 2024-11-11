@@ -1,0 +1,8 @@
+<h5 class="mt-4">Scrivi una recensione</h5>
+<form (ngSubmit)="submitReview()">
+	  <label class="form-control">Valutazione:
+	  <input [(ngModel)]="comment.rating" type="number" name="rating" min="1" max="5"></label>
+	  <textarea [(ngModel)]="comment.message" class="form-control"
+        rows="3" name="message" placeholder="Inserisci la tua recensione..."></textarea>
+      <button class="btn btn-success mt-3" type="submit">Invia recensione</button>
+</form>

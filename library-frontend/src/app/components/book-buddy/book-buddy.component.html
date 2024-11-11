@@ -1,0 +1,23 @@
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5>Book Buddy</h5>
+    </div>
+    <div class="card-body">
+	  <div class="book-buddy-chat">
+		  <div class="messages">
+			<div *ngFor="let msg of messages" [ngClass]="msg.role">
+			  <strong *ngIf="msg.role === 'user'">Tu:</strong>
+			  <strong *ngIf="msg.role === 'ai'">Book Buddy:</strong>
+			  {{ msg.content }}
+			</div>
+		  </div>
+		  <input
+				type="text"
+				class="form-control mt-3"
+				placeholder="Chiedi a Book Buddy..."
+				[(ngModel)]="userMessage"
+				(keyup.enter)="sendMessage(userMessage)"
+			  />
+      </div>
+  </div>
+</div>
